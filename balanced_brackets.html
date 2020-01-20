@@ -1,0 +1,46 @@
+<html>
+  <head></head>
+  <body>
+    <p>
+      Given a string of round, curly, and square open and closing brackets,
+      return whether the brackets are balanced (well-formed).
+    </p>
+    <p>For example, given the string "([])[]({})", you should return true.</p>
+    <p>Given the string "([)]" or "((()", you should return false.</p>
+    <script type="text/javascript">
+      let string = "([])[]({})";
+      console.log(isWellFormedString(string));
+      function isWellFormedString(string) {
+        let stack = [];
+        let topOfStack;
+        for (let i = 0; i < string.length; i++) {
+          let currentCharacter = string[i];
+          switch (currentCharacter) {
+            case ")":
+              topOfStack = stack.pop();
+              if (topOfStack !== "(") {
+                return false;
+              }
+              break;
+            case "]":
+              topOfStack = stack.pop();
+              if (topOfStack !== "[") {
+                return false;
+              }
+              break;
+            case "}":
+              topOfStack = stack.pop();
+              if (topOfStack !== "{") {
+                return false;
+              }
+              break;
+            default:
+              stack.push(currentCharacter);
+          }
+        }
+        if (stack.length === 0) return true;
+        else return false;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+  <head></head>
+  <body>
+    <p>
+      Run-length encoding is a fast and simple method of encoding strings. The
+      basic idea is to represent repeated successive characters as a single
+      count and character. For example, the string "AAAABBBCCDAA" would be
+      encoded as "4A3B2C1D2A".
+    </p>
+    <p>
+      Implement run-length encoding and decoding. You can assume the string to
+      be encoded have no digits and consists solely of alphabetic characters.
+      You can assume the string to be decoded is valid.
+    </p>
+    <script type="text/javascript">
+      function encode(str) {
+        let count;
+        let encoded_string = "";
+        for (let i = 0; i < str.length; i++) {
+          count = 1;
+          while (count < str.length - 1 && str[i] === str[i + 1]) {
+            count++;
+            i++;
+          }
+          encoded_string = `${encoded_string}${count}${str[i]}`;
+        }
+        return encoded_string;
+      }
+      function decode(str) {
+        let count;
+        let decoded_string = "";
+        let j;
+        for (let i = 0; i < str.length; i = i + 2) {
+          count = parseInt(str[i]);
+          j = 0;
+          while (j < count) {
+            decoded_string = decoded_string.concat(str[i + 1]);
+            j++;
+          }
+        }
+        return decoded_string;
+      }
+      var string = "AAAABBBCCDAA";
+      var encoded_string = "4A3B2C1D2A";
+      console.log(encode(string)); // 4A3B2C1D2A
+      console.log(decode(encoded_string)); // AAAABBBCCDAA
+    </script>
+  </body>
+</html>
